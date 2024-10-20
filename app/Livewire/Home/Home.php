@@ -14,4 +14,8 @@ class Home extends Component
     {
         return view('livewire.home.home');
     }
+
+    public function setMenu(string $menu){
+        $this->menu = $menu;
+    }
 }

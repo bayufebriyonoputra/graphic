@@ -1,19 +1,21 @@
 <div>
 
-        <div class="flex justify-end p-8">
-            <a href="{{ url('/login') }}"
-                class="px-4 py-2 text-white bg-blue-400 rounded-md hover:bg-blue-700">Login</a>
-        </div>
-        <div class="flex justify-center items-center">
-            <div class="w-full max-w-none" x-data="{menu: $wire.entangle('menu')}">
-                <p class="text-2xl font-bold text-center dark:text-white">Graphic <span x-text="menu"></span></p>
-                <div class="flex gap-3 justify-center mt-5">
-                    <button x-on:click="$wire.menu='Kanban Circuit'" class="px-4 py-2 text-white bg-sky-400 rounded-md hover:bg-sky-700">Kanban Circuit</button>
-                    <button x-on:click="$wire.menu='Kanban Material FA'" class="px-4 py-2 text-white bg-sky-400 rounded-md hover:bg-sky-700">Kanban Material FA</button>
-                    <button x-on:click="$wire.menu='Kanban Material PA'" class="px-4 py-2 text-white bg-sky-400 rounded-md hover:bg-sky-700">Kanban Material PA</button>
-                </div>
-                <div class="flex gap-3 justify-center my-4">
-                    {{-- <div class="px-4 w-full">
+    <div class="flex justify-end p-8">
+        <a href="{{ url('/login') }}" class="px-4 py-2 text-white bg-blue-400 rounded-md hover:bg-blue-700">Login</a>
+    </div>
+    <div class="flex justify-center items-center">
+        <div class="w-full max-w-none">
+            <p class="text-2xl font-bold text-center dark:text-white">Graphic <span x-text="$wire.menu"></span></p>
+            <div class="flex gap-3 justify-center mt-5">
+                <button wire:click="setMenu('Kanban Circuit')"
+                    class="px-4 py-2 text-white bg-sky-400 rounded-md hover:bg-sky-700">Kanban Circuit</button>
+                <button wire:click="setMenu('Kanban Material FA')"
+                    class="px-4 py-2 text-white bg-sky-400 rounded-md hover:bg-sky-700">Kanban Material FA</button>
+                <button wire:click="setMenu('Kanban Material PA')"
+                    class="px-4 py-2 text-white bg-sky-400 rounded-md hover:bg-sky-700">Kanban Material PA</button>
+            </div>
+            <div class="flex gap-3 justify-center my-4">
+                {{-- <div class="px-4 w-full">
                         <label for="options" class="block mb-2 text-sm font-medium text-gray-700">Choose a month:</label>
                         <select id="options" name="options"
                             class="block px-4 py-2 w-full bg-white rounded-md border border-gray-300 shadow-sm transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 hover:bg-gray-50">
@@ -33,21 +35,24 @@
                         </select>
                     </div> --}}
 
-                </div>
+            </div>
 
-                {{-- Content Graphic --}}
-                <template x-if="$wire.menu == 'Kanban Circuit'">>
+
+
+            {{-- Content Graphic --}}
+            <div wire:loading.remove>
+                @if ($menu == 'Kanban Circuit')
                     <livewire:home.kanban-circuit />
-                </template>
-                <template x-if="$wire.menu == 'Kanban Material FA'">>
+                @elseif ($menu == 'Kanban Material FA')
                     <livewire:home.kanban-material-fa />
-                </template>
-                <template x-if="$wire.menu == 'Kanban Material PA'">>
+                @elseif ($menu == 'Kanban Material PA')
                     <livewire:home.kanban-material-pa />
-                </template>
+                @endif
             </div>
 
         </div>
+
+    </div>
 
 
 
